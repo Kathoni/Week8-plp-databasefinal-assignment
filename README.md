@@ -69,3 +69,37 @@ The database is structured with the following tables:
 │ • quantity                            │
 │ • price                               │
 └───────────────────────────────────────┘
+
+## Entity Relationship Diagram (ERD) 2
+
+```text
++----------------+       1-M       +----------------+
+|     Users      |<----------------|  Transactions  |
++----------------+                 +----------------+
+| user_id (PK)   |                 | transaction_id (PK) |
+| username (UQ)  |                 | user_id (FK)        |
+| password       |                 | transaction_date    |
+| email (UQ)     |                 | transaction_type    |
++----------------+                 | total_amount        |
+                                   +----------------+
+
++----------------+       1-M       +----------------+
+|   Suppliers    |<----------------|     Items       |
++----------------+                 +----------------+
+| supplier_id (PK)|                | item_id (PK)       |
+| name            |                | name               |
+| contact_name    |                | description        |
+| contact_phone   |                | quantity           |
+| contact_email   |                | price              |
++----------------+                 | supplier_id (FK)   |
+                                   +----------------+
+
++----------------+       1-M       +------------------------+      M-1       +----------------+
+| Transactions   |<----------------|   TransactionDetails   |--------------->|     Items      |
++----------------+                 +------------------------+                +----------------+
+| transaction_id |                 | transaction_detail_id (PK)             | item_id (PK)   |
+| ...            |                 | transaction_id (FK)                    | ...            |
++----------------+                 | item_id (FK)                           +----------------+
+                                   | quantity                              
+                                   | price                                 
+                                   +------------------------+
